@@ -5,7 +5,11 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:generate": "cd packages/db && tsc -b && npx prisma generate && cd ../..",
+    "start-http-backend": "cd apps/http-backend && pnpm run dev && cd ../..",
+    "start-ws-backend": "cd apps/ws-backend && pnpm run dev && cd ../..",
+    "start-frontend": "cd apps/frontend && pnpm run start && cd ../.."
   },
   "devDependencies": {
     "prettier": "^3.2.5",

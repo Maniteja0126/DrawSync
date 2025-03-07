@@ -1,0 +1,12 @@
+# Ignore node_modules and Turbo build cache
+node_modules
+.turbo
+.pnpm-store
+
+# Ignore Git and environment files
+.git
+.env
+*.log
+
+# Ignore the Docker folder itself (optional)
+Docker/

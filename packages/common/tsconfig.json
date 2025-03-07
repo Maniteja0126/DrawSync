@@ -1,0 +1,16 @@
+
+{
+    "extends" : "@repo/typescript-config/base.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "paths": {
+            "@app/*": ["*"]
+        },
+        "module": "NodeNext",
+        "moduleResolution": "nodenext",
+        "target": "ESNext"
+    },
+  "include": ["src/**/*"]
+}
