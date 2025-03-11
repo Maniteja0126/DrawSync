@@ -1,5 +1,5 @@
 {
-  "name": "excalidraw-clone",
+  "name": "DrawSync",
   "private": true,
   "scripts": {
     "build": "turbo build",

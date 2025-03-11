@@ -11,3 +11,4 @@ export const redisURL = process.env.REDIS_URL ;
 
 
 export const TOPIC = process.env.REDIS_TOPIC ||  "chat_messages";
+export const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
