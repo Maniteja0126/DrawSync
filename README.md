@@ -1,84 +1,101 @@
-# Turborepo starter
+# DrawSync - Excalidraw Clone with WebSockets
 
-This is an official starter Turborepo.
+DrawSync is a real-time collaborative whiteboard application based on Excalidraw. It enables multiple users to join the same room and collaborate on a shared project with real-time editing features.
 
-## Using this example
+## Features
+- Create a room and invite multiple users.
+- Real-time collaborative drawing and editing.
+- WebSocket-based communication for seamless updates.
+- TurboRepo monorepo structure for optimized development.
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
+## Running Locally
+
+### Prerequisites
+- **Node.js** (LTS version recommended)
+- **pnpm** (Package manager) - Install via:
+  ```sh
+  npm install -g pnpm
+  ```
+- **Redis** (Required for queue management)
+- **.env configuration** (Create `.env` files as required)
+
+### Steps to Run Without Docker
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/Maniteja0126/DrawSync.git
+   cd DrawSync
+   ```
+2. **Install dependencies:**
+   ```sh
+   pnpm install
+   ```
+3. **Set up environment variables:**
+   - Ensure you have the required `.env` files for frontend, backend, and WebSocket services.
+   - Add a Redis connection URL in the backend environment files.
+4. **Start the application:**
+   ```sh
+   pnpm run dev
+   ```
+5. The services will be available at:
+   - Frontend: `http://localhost:3000`
+   - HTTP Backend: `http://localhost:3001`
+   - WebSocket Backend: `ws://localhost:8080`
+
+---
+
+## Running with Docker
+
+### Prerequisites
+- **Docker** (Latest version recommended)
+- **Docker Compose**
+
+### Steps to Run With Docker
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/Maniteja0126/DrawSync.git
+   cd DrawSync
+   ```
+2. **Set up environment variables:**
+   - Create and configure the required `.env` files.
+   - Ensure Redis URL is set for queue management.
+3. **Build and run the services:**
+   ```sh
+   docker-compose up --build
+   ```
+4. The services will be accessible at:
+   - Frontend: `http://localhost:3000`
+   - HTTP Backend: `http://localhost:3001`
+   - WebSocket Backend: `ws://localhost:8080`
+
+---
+
+## Folder Structure
+```
+DrawSync/
+├── apps/
+│   ├── frontend/         # Next.js frontend
+│   ├── http-backend/     # Express-based backend API
+│   ├── ws-backend/       # WebSocket backend service
+│
+├── packages/
+│   ├── db/              # Prisma schema for PostgreSQL
+│
+├── docker/
+│   ├── dockerfile.frontend
+│   ├── dockerfile.http-backend
+│   ├── dockerfile.ws-backend
+│
+├── docker-compose.yml    # Root-level Docker Compose config
+├── .env.example          # Example environment variables
+└── README.md             # Project documentation
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## Contributing
+If you'd like to contribute, please fork the repository and create a pull request. Make sure to test your changes locally before submitting a PR.
 
-### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)

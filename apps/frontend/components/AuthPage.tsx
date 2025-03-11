@@ -8,6 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { HTTP_BACKEND } from "@/lib/config";
+import { AnimatedBackground } from "./AniminatedBackground";
 
 
 export function AuthPage({ isSignin }: { isSignin: boolean }) {
@@ -20,11 +21,12 @@ export function AuthPage({ isSignin }: { isSignin: boolean }) {
   const handleAuth = async () => {
     try {
       const endpoint = isSignin ? "auth/signin" : "auth/signup";
-      const requestData = isSignin
-        ? { username, password }
-        : { name, username, password };
 
-      console.log("Request ", requestData);
+      // const requestData = isSignin
+      //   ? { username, password }
+      //   : { name, username, password };
+
+      // console.log("Request ", requestData);
 
       const response = await axios.post(
         `${HTTP_BACKEND}/${endpoint}`,
@@ -35,8 +37,6 @@ export function AuthPage({ isSignin }: { isSignin: boolean }) {
           },
         }
       );
-
-      console.log("Response : ", response.data);
 
       if (isSignin) {
         localStorage.setItem("AuthToken", response.data.token);
@@ -52,8 +52,15 @@ export function AuthPage({ isSignin }: { isSignin: boolean }) {
     }
   };
 
+  const handleTestCredentials = () => {
+    setUsername("test@gmail.com");
+    setPassword("test@123");
+    toast.info("Test credentials filled!");
+  };
+
   return (
     <div className="w-screen h-screen flex justify-center items-center dark:bg-black dark:text-white">
+      <AnimatedBackground/>
       <div className="w-full max-w-md p-8 m-2 bg-slate-800 rounded-xl shadow-lg shadow-gray-800">
         <h2 className="text-center text-2xl font-semibold mb-6 text-white">
           {isSignin ? "Sign In" : "Sign Up"}
@@ -92,10 +99,22 @@ export function AuthPage({ isSignin }: { isSignin: boolean }) {
         </div>
 
         <div className="pt-4 flex justify-center">
-          <Button className="px-10 py-3" onClick={handleAuth}>
+          <Button
+            className="px-10 py-2 w-full bg-green-600 hover:bg-green-400 rounded-sm mb-2"
+            onClick={handleAuth}
+          >
             {isSignin ? "Sign In" : "Sign Up"}
           </Button>
         </div>
+
+        {isSignin && (
+          <Button
+            className="px-10 py-2 w-full bg-gray-600 hover:bg-gray-500 text-white"
+            onClick={handleTestCredentials}
+          >
+            Use Test Credentials
+          </Button>
+        )}
 
         <div className="mt-6 text-center text-sm text-gray-400">
           <p>

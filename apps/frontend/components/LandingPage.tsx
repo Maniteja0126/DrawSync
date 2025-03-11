@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { AnimatedBackground } from "./AniminatedBackground";
 
 export function LandingPage() {
   const [isMounted, setIsMounted] = useState(false);
@@ -25,37 +26,7 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 overflow-hidden">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute -top-20 -left-20 w-40 h-40 bg-blue-500/20 rounded-full animate-float"
-          style={{ animationDelay: "0s" }}
-        ></div>
-        <div
-          className="absolute top-1/3 -right-20 w-60 h-60 bg-purple-500/20 rounded-full animate-float"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div
-          className="absolute bottom-20 left-1/3 w-32 h-32 bg-green-500/20 rounded-full animate-float"
-          style={{ animationDelay: "2s" }}
-        ></div>
-
-        <div className="absolute top-20 right-1/4 animate-spin-slow">
-          <Square className="w-12 h-12 text-blue-500/30" />
-        </div>
-        <div
-          className="absolute bottom-1/4 left-20 animate-spin-slow"
-          style={{ animationDelay: "2s" }}
-        >
-          <Triangle className="w-12 h-12 text-purple-500/30" />
-        </div>
-        <div
-          className="absolute top-1/3 left-1/4 animate-spin-slow"
-          style={{ animationDelay: "4s" }}
-        >
-          <Circle className="w-8 h-8 text-green-500/30" />
-        </div>
-      </div>
-
+      <AnimatedBackground />
       <div className="container mx-auto px-4 pt-20 pb-32 relative">
         <div className="text-center space-y-8">
           <div className="space-y-4 animate-fade-in">
@@ -91,7 +62,7 @@ export function LandingPage() {
             className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow animate-fade-in"
             style={{ animationDelay: "0.8s" }}
           >
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4 animate-float">
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4 ">
               <Pencil className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -107,7 +78,7 @@ export function LandingPage() {
             className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow animate-fade-in"
             style={{ animationDelay: "1s" }}
           >
-            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4 animate-float">
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4 ">
               <Users className="w-6 h-6 text-purple-600 dark:text-purple-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -122,7 +93,7 @@ export function LandingPage() {
             className="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow animate-fade-in"
             style={{ animationDelay: "1.2s" }}
           >
-            <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4 animate-float">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4 ">
               <Share2 className="w-6 h-6 text-green-600 dark:text-green-400" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">

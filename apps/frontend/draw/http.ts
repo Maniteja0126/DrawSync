@@ -5,11 +5,9 @@ import axios from "axios";
 
 export async function getCanvasShapes(roomId: string) {
   const res = await axios.get(`${HTTP_BACKEND}/room/chats/${roomId}`);
-  console.log("Response:", res.data);
 
   const messages = res.data.chats || []; 
 
-  console.log("Messages:", messages);
 
   const shapes = messages
     .map((x: { chatMessage?: string }) => {

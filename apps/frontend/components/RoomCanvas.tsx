@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { WS_BACKEND_URL } from "@/lib/config";
 import { useEffect, useState } from "react";
-import { Canvas } from './Canvas';
+import { Canvas } from "./Canvas";
 
 export function RoomCanvas({ roomId }: { roomId: string }) {
   const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -10,21 +10,18 @@ export function RoomCanvas({ roomId }: { roomId: string }) {
 
   useEffect(() => {
     const token = localStorage.getItem("AuthToken");
-    setAuthToken(token);  
-    console.log("token ", token);
+    setAuthToken(token);
   }, []);
 
   useEffect(() => {
     if (authToken) {
-      console.log("Socket " , WS_BACKEND_URL);
-      const ws = new WebSocket(`ws://localhost:8080?token=${authToken}`);
+      const ws = new WebSocket(`${WS_BACKEND_URL}?token=${authToken}`);
       ws.onopen = () => {
         setSocket(ws);
         const data = JSON.stringify({
           type: "join_room",
           roomId,
         });
-        console.log(data);
         ws.send(data);
       };
 
@@ -35,7 +32,11 @@ export function RoomCanvas({ roomId }: { roomId: string }) {
   }, [authToken, roomId]);
 
   if (!socket) {
-    return <div>Connecting to server ....</div>;
+    return (
+      <div className="flex justify-center align-middle">
+        Connecting to server ....
+      </div>
+    );
   }
 
   return (

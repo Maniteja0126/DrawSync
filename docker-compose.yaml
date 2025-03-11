@@ -8,36 +8,25 @@ services:
     ports:
       - "3000:3000" 
     depends_on:
-      # - http-backend
-      - backend
+      - http-backend
 
 
-  # http-backend:
-  #   build:
-  #     context: .
-  #     dockerfile: Docker/Dockerfile.http-backend
-  #   ports:
-  #     - "3001:3001"
-  #   depends_on:
-  #     - ws-backend
-  #   env_file:
-  #     - .env
-
-  # ws-backend:
-  #   build:
-  #     context: .
-  #     dockerfile: Docker/Dockerfile.ws-backend
-  #   ports:
-  #     - "8080:8080" 
-  #   env_file:
-  #     - .env
-
-  backend:
+  http-backend:
     build:
       context: .
-      dockerfile: Docker/Dockerfile.backend
+      dockerfile: Docker/Dockerfile.http-backend
     ports:
       - "3001:3001"
-      - "8080:8080"
+    depends_on:
+      - ws-backend
+    env_file:
+      - .env
+
+  ws-backend:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile.ws-backend
+    ports:
+      - "8080:8080" 
     env_file:
       - .env
