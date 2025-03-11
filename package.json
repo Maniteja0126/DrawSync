@@ -1,5 +1,5 @@
 {
-  "name": "excalidraw-clone",
+  "name": "DrawSync",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -7,8 +7,8 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "cd packages/db && tsc -b && npx prisma generate && cd ../..",
-    "start-http-backend": "cd apps/http-backend && pnpm run dev && cd ../..",
-    "start-ws-backend": "cd apps/ws-backend && pnpm run dev && cd ../..",
+    "start-http-backend": "cd apps/http-backend && pnpm run start && cd ../..",
+    "start-ws-backend": "cd apps/ws-backend && pnpm run start && cd ../..",
     "start-frontend": "cd apps/frontend && pnpm run start && cd ../.."
   },
   "devDependencies": {
