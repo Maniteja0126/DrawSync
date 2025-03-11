@@ -73,7 +73,6 @@ export class Game {
 
   private async initExistingShapes() {
     this.existingShapes = await getCanvasShapes(this.roomId);
-    console.log(this.existingShapes);
 
     this.clearCanvas();
   }
@@ -101,17 +100,14 @@ export class Game {
 
   setSelectedTool(tool: Tool) {
     this.selectedTool = tool;
-    console.log(this.selectedTool);
   }
 
   setSelectedColor(color: string) {
     this.selectedColor = color;
-    console.log(this.selectedColor);
   }
 
   setLineWidth(lineWidth: number) {
     this.lineWidth = lineWidth;
-    console.log(lineWidth);
   }
 
   handleDoubleClick(e: MouseEvent) {
@@ -123,12 +119,7 @@ export class Game {
     const clickedShape = this.existingShapes.find((shape) => {
       if (shape.type === "text") {
         const { startX, startY, endX, endY } = this.getBoundingBox(shape)!;
-        console.log({
-          startX,
-          startY,
-          endX,
-          endY,
-        });
+
 
         return (x >= startX && x <= endX) || (y >= startY && y <= endY);
       }
@@ -136,7 +127,6 @@ export class Game {
     });
 
     if (clickedShape) {
-      console.log("clickedShape -> ", clickedShape);
 
       this.socket.send(
         JSON.stringify({
@@ -461,7 +451,6 @@ export class Game {
     // this.ctx.fillStyle = "#000000";
     // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // console.log(this.existingShapes);
 
     this.existingShapes.forEach((shape) => {
       switch (shape.type) {
@@ -511,7 +500,6 @@ export class Game {
         case "pencil":
           if (shape.points?.length === undefined || shape.points?.length < 2)
             return;
-          // console.log("painting...");
 
           this.ctx.strokeStyle = shape.color;
           this.ctx.lineWidth = shape.lineWidth;
@@ -560,14 +548,12 @@ export class Game {
         );
       });
 
-      console.log("Shapes selected:", this.shapesToBeDeleted);
 
       this.shapesToBeDeleted.forEach((shapeTOBeDelete) => {
         const shape = this.existingShapes.find(
           (s) => s.id === shapeTOBeDelete.id
         );
         if (shape) {
-          //* Due to indexing logic , after deleting one element , remaining element shifs -> change in Index , -> use id's
           this.socket.send(
             JSON.stringify({
               type: "delete_shape_by_id",
@@ -702,11 +688,8 @@ export class Game {
   initHandlers() {
     this.socket.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      console.log(message);
-
       if (message.type === "chat") {
         const parsedShape = JSON.parse(message.chatMessage);
-        console.log(JSON.stringify(parsedShape));
 
         const isDuplicate = this.existingShapes.some(
           (existingShape) =>
