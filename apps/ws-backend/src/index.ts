@@ -210,7 +210,7 @@
 import "./config.js";
 import { WebSocket, WebSocketServer } from "ws";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET, TOPIC, redisURL } from "./config.js";
+import { JWT_SECRET, TOPIC, redisURL , PORT } from "./config.js";
 import { createClient } from "redis";
 import prismaClient from "@repo/db/client";
 
@@ -219,7 +219,7 @@ class WebSocketSingleton {
 
   public static getInstance(): WebSocketServer {
     if (!WebSocketSingleton.instance) {
-      WebSocketSingleton.instance = new WebSocketServer({ port: 8080 });
+      WebSocketSingleton.instance = new WebSocketServer({ port: PORT });
     }
     return WebSocketSingleton.instance;
   }
