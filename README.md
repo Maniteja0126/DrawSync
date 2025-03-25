@@ -1,4 +1,4 @@
-# DrawSync - Excalidraw Clone with WebSockets
+# DrawSync - Emphasizes real-time collaborative drawing.
 
 DrawSync is a real-time collaborative whiteboard application based on Excalidraw. It enables multiple users to join the same room and collaborate on a shared project with real-time editing features.
 
