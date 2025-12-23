@@ -213,14 +213,31 @@ import jwt from "jsonwebtoken";
 import { JWT_SECRET, TOPIC, redisURL , PORT } from "./config.js";
 import { createClient } from "redis";
 import prismaClient from "@repo/db/client";
+import http from "http";
 
 class WebSocketSingleton {
   private static instance: WebSocketServer;
 
   public static getInstance(): WebSocketServer {
     if (!WebSocketSingleton.instance) {
-      WebSocketSingleton.instance = new WebSocketServer({ port: PORT });
+      const server = http.createServer((req, res) => {
+        if (req.url === "/health") {
+          res.writeHead(200, { "Content-Type": "text/plain" });
+          res.end("ok");
+          return;
+        }
+
+        res.writeHead(404);
+        res.end();
+      });
+
+      WebSocketSingleton.instance = new WebSocketServer({ server });
+
+      server.listen(PORT, () => {
+        console.log(`WS server listening on port ${PORT}`);
+      });
     }
+
     return WebSocketSingleton.instance;
   }
 }

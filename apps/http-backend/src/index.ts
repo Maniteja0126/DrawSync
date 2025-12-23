@@ -34,6 +34,11 @@ export const corsOptions: CorsOptions = {
 };
 
 
+app.get("/health" , (_req , res) => {
+    res.status(200).json({status: "ok"})
+})
+
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
